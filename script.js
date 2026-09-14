@@ -106,7 +106,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe all fade-in elements and skills
-document.querySelectorAll('.hero, .about, .skills, .projects, .contact').forEach(el => {
+document.querySelectorAll('.hero, .about, .skills, .projects, .asd-section, .contact').forEach(el => {
     el.classList.add('fade-in');
     observer.observe(el);
 });
@@ -122,10 +122,22 @@ document.querySelector('.cta-btn').addEventListener('click', (e) => {
 });
 
 // Project data
+const graphicDesignImages = [
+    '01.jpeg',
+    '02.jpeg',
+    '03.jpeg',
+    '04.jpeg',
+    '05.jpeg',
+    '06.jpeg',
+    '07.jpeg'
+];
+
+const asdWorkImages = Array.from({ length: 15 }, (_, index) => `images/asd/${index + 1}.png`);
+
 const projectData = [
     {
         type: 'coming-soon',
-        categories: ['all', 'graphic', 'web'],
+        categories: ['all', 'web'],
         title: 'Projects Coming Soon',
         subtitle: "I'm currently working on exciting projects. Stay tuned!",
         icon: 'fas fa-rocket'
@@ -135,6 +147,12 @@ const projectData = [
         categories: ['all', 'ui'],
         src: `images/asd/${index + 1}.png`,
         alt: `UI project ${index + 1}`
+    })),
+    ...graphicDesignImages.map((fileName) => ({
+        type: 'graphic',
+        categories: ['all', 'graphic'],
+        src: `images/design/${fileName}`,
+        alt: ''
     }))
 ];
 
@@ -195,6 +213,7 @@ function renderProjects(filter = 'all') {
                     </div>
                 `;
             } else {
+                card.classList.toggle('project-card--graphic', project.type === 'graphic');
                 card.innerHTML = `<img src="${project.src}" alt="${project.alt}" loading="lazy">`;
                 card.addEventListener('click', () => openLightbox(project.src));
             }
@@ -214,8 +233,22 @@ filterButtons.forEach((button) => {
 
 renderProjects();
 
+const asdWorkGrid = document.getElementById('asd-work-grid');
+
+if (asdWorkGrid) {
+    asdWorkImages.forEach((src, index) => {
+        const workCard = document.createElement('button');
+        workCard.className = 'asd-work-card';
+        workCard.type = 'button';
+        workCard.setAttribute('aria-label', `Open ASD work ${index + 1}`);
+        workCard.innerHTML = `<img src="${src}" alt="ASD work ${index + 1}" loading="lazy">`;
+        workCard.addEventListener('click', () => openLightbox(src));
+        asdWorkGrid.appendChild(workCard);
+    });
+}
+
 // Button click animation
-document.querySelectorAll('.cta-btn, .social-link').forEach(btn => {
+document.querySelectorAll('.cta-btn, .social-link, .asd-instagram').forEach(btn => {
     btn.addEventListener('click', function(e) {
         this.style.transform = 'scale(0.95)';
         setTimeout(() => {
