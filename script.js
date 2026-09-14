@@ -132,8 +132,6 @@ const graphicDesignImages = [
     '07.jpeg'
 ];
 
-const asdWorkImages = Array.from({ length: 15 }, (_, index) => `images/asd/${index + 1}.png`);
-
 const projectData = [
     {
         type: 'coming-soon',
@@ -233,22 +231,8 @@ filterButtons.forEach((button) => {
 
 renderProjects();
 
-const asdWorkGrid = document.getElementById('asd-work-grid');
-
-if (asdWorkGrid) {
-    asdWorkImages.forEach((src, index) => {
-        const workCard = document.createElement('button');
-        workCard.className = 'asd-work-card';
-        workCard.type = 'button';
-        workCard.setAttribute('aria-label', `Open ASD work ${index + 1}`);
-        workCard.innerHTML = `<img src="${src}" alt="ASD work ${index + 1}" loading="lazy">`;
-        workCard.addEventListener('click', () => openLightbox(src));
-        asdWorkGrid.appendChild(workCard);
-    });
-}
-
 // Button click animation
-document.querySelectorAll('.cta-btn, .social-link, .asd-instagram').forEach(btn => {
+document.querySelectorAll('.cta-btn, .social-link, .asd-instagram, .asd-visit-button').forEach(btn => {
     btn.addEventListener('click', function(e) {
         this.style.transform = 'scale(0.95)';
         setTimeout(() => {
