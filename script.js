@@ -129,7 +129,9 @@ const graphicDesignImages = [
     '04.jpeg',
     '05.jpeg',
     '06.jpeg',
-    '07.jpeg'
+    '07.jpeg',
+    '08.jpeg',
+    '09.jpeg'
 ];
 
 const projectData = [
