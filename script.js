@@ -136,11 +136,11 @@ const graphicDesignImages = [
 
 const projectData = [
     {
-        type: 'coming-soon',
+        type: 'web',
         categories: ['all', 'web'],
-        title: 'Projects Coming Soon',
-        subtitle: "I'm currently working on exciting projects. Stay tuned!",
-        icon: 'fas fa-rocket'
+        title: 'My Personal CV Website',
+        subtitle: 'A personal CV website showcasing my profile and skills in a clean, modern, and accessible layout.',
+        href: 'https://anasqeshta5-code.github.io/cv/'
     },
     ...Array.from({ length: 15 }, (_, index) => ({
         type: 'ui',
@@ -198,28 +198,58 @@ function renderProjects(filter = 'all') {
 
     projectGrid.innerHTML = '';
 
-    projectData
-        .filter((project) => project.categories.includes(filter))
-        .forEach((project) => {
-            const card = document.createElement('article');
-            card.className = project.type === 'coming-soon' ? 'project-card project-card--soon' : 'project-card';
+    const filteredProjects = projectData.filter((project) => project.categories.includes(filter));
 
-            if (project.type === 'coming-soon') {
-                card.innerHTML = `
-                    <div>
-                        <i class="${project.icon}"></i>
-                        <h3>${project.title}</h3>
-                        <p>${project.subtitle}</p>
+    if (filteredProjects.length === 0) {
+        const card = document.createElement('article');
+        card.className = 'project-card project-card--soon';
+        card.innerHTML = `
+            <div>
+                <i class="fas fa-rocket" aria-hidden="true"></i>
+                <h3>Projects Coming Soon</h3>
+                <p>I'm currently working on exciting projects. Stay tuned!</p>
+            </div>
+        `;
+        projectGrid.appendChild(card);
+        return;
+    }
+
+    filteredProjects.forEach((project) => {
+        const card = document.createElement('article');
+        card.className = 'project-card';
+
+        if (project.type === 'web') {
+            card.classList.add('project-card--web');
+            card.innerHTML = `
+                <div class="project-web-preview" aria-hidden="true">
+                    <div class="project-web-window">
+                        <div class="project-web-window-bar"><span></span><span></span><span></span></div>
+                        <div class="project-web-document">
+                            <div class="project-web-avatar"><i class="fas fa-user"></i></div>
+                            <div class="project-web-lines"><span></span><span></span></div>
+                            <div class="project-web-section"><span></span><span></span><span></span></div>
+                        </div>
                     </div>
-                `;
-            } else {
-                card.classList.toggle('project-card--graphic', project.type === 'graphic');
-                card.innerHTML = `<img src="${project.src}" alt="${project.alt}" loading="lazy">`;
-                card.addEventListener('click', () => openLightbox(project.src));
-            }
+                    <span class="project-web-label">PERSONAL CV</span>
+                </div>
+                <div class="project-web-content">
+                    <span class="project-web-category">Web Development</span>
+                    <h3>${project.title}</h3>
+                    <p>${project.subtitle}</p>
+                    <a class="project-view-button" href="${project.href}" target="_blank" rel="noopener noreferrer">
+                        <span>Live Demo</span>
+                        <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    </a>
+                </div>
+            `;
+        } else {
+            card.classList.toggle('project-card--graphic', project.type === 'graphic');
+            card.innerHTML = `<img src="${project.src}" alt="${project.alt}" loading="lazy">`;
+            card.addEventListener('click', () => openLightbox(project.src));
+        }
 
-            projectGrid.appendChild(card);
-        });
+        projectGrid.appendChild(card);
+    });
 }
 
 filterButtons.forEach((button) => {
@@ -242,4 +272,3 @@ document.querySelectorAll('.cta-btn, .social-link, .asd-instagram, .asd-visit-bu
         }, 150);
     });
 });
-

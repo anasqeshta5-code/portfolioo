@@ -462,6 +462,184 @@ section {
     margin-top: 0.5rem;
 }
 
+.project-card--web {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    min-height: 0;
+    padding: 1rem;
+    cursor: default;
+}
+
+.project-web-preview {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 175px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 14px;
+    background:
+        radial-gradient(ellipse at 20% 15%, rgba(0, 212, 255, 0.16), transparent 55%),
+        radial-gradient(ellipse at 85% 85%, rgba(99, 102, 241, 0.2), transparent 52%),
+        #101522;
+}
+
+.project-web-window {
+    width: 64%;
+    padding: 0.55rem;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 9px;
+    background: rgba(10, 10, 10, 0.82);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+}
+
+.project-card--web:hover .project-web-window {
+    transform: rotate(0) scale(1.04);
+}
+
+.project-web-window-bar {
+    display: flex;
+    gap: 4px;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.project-web-window-bar span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #6366f1;
+}
+
+.project-web-window-bar span:first-child {
+    background: #00d4ff;
+}
+
+.project-web-document {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 0.45rem;
+    padding: 0.7rem 0.2rem 0.2rem;
+}
+
+.project-web-avatar {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border-radius: 50%;
+    color: #0a0a0a;
+    background: linear-gradient(135deg, #00d4ff, #6366f1);
+    font-size: 0.7rem;
+}
+
+.project-web-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.project-web-lines span,
+.project-web-section span {
+    display: block;
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(148, 163, 184, 0.28);
+}
+
+.project-web-lines span:first-child {
+    width: 68%;
+    background: rgba(0, 212, 255, 0.68);
+}
+
+.project-web-lines span:last-child {
+    width: 44%;
+}
+
+.project-web-section {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 5px;
+    margin-top: 0.15rem;
+}
+
+.project-web-section span:first-child {
+    width: 32%;
+    height: 5px;
+    background: rgba(99, 102, 241, 0.8);
+}
+
+.project-web-section span:nth-child(2) {
+    width: 94%;
+}
+
+.project-web-section span:last-child {
+    width: 72%;
+}
+
+.project-web-label {
+    position: absolute;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    color: rgba(226, 232, 240, 0.75);
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+}
+
+.project-web-content h3 {
+    margin: 0.45rem 0;
+    color: #e2e8f0;
+    font-size: 1.1rem;
+    line-height: 1.4;
+}
+
+.project-web-content p {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.project-web-category {
+    color: #00d4ff;
+    font-size: 0.72rem;
+    font-weight: 500;
+}
+
+.project-view-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 1rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid rgba(0, 212, 255, 0.38);
+    border-radius: 999px;
+    color: #e2e8f0;
+    background: linear-gradient(110deg, rgba(0, 212, 255, 0.12), rgba(99, 102, 241, 0.16));
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.project-view-button:hover,
+.project-view-button:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(0, 212, 255, 0.8);
+    box-shadow: 0 8px 22px rgba(0, 212, 255, 0.18);
+}
+
+.project-view-button:focus-visible {
+    outline: 2px solid #00d4ff;
+    outline-offset: 3px;
+}
+
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.1); }
@@ -892,8 +1070,8 @@ section {
 
     .project-card,
     .project-card img,
-    .project-card--soon {
+    .project-card--soon,
+    .project-card--web {
         min-height: 180px;
     }
 }
-
